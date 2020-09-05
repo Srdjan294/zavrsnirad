@@ -37,6 +37,5 @@ class App
         }else{
             echo 'Kreirati funkciju unutar klase ' . $klasa . '-&gt;' . $funkcija;
         }
-
     }
 } 
