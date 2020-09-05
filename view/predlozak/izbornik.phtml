@@ -1,27 +1,36 @@
 <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
   <button class="menu-icon" type="button" data-toggle="example-menu"></button>
-  <div class="title-bar-title">Menu</div>
+  <div class="title-bar-title"><?=APP::config('nazivAPP') ?></div>
 </div>
 
 <div class="top-bar" id="example-menu">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text">Site Title</li>
-      <li>
-        <a href="#">One</a>
-        <ul class="menu vertical">
-          <li><a href="#">One</a></li>
-          <li><a href="#">Two</a></li>
-          <li><a href="#">Three</a></li>
+    <li>
+    <a href="<?=APP::config('url') ?>">
+            <?=APP::config('nazivAPP') ?>
+        </a>
+    </li>
+
+      <li><a href="<?=APP::config('url') ?>index/onama">O nama</a></li>
+
+      <?php if(isset($_SESSION['autoriziran'])): ?>
+        <!-- ovdje dođe privatni dio izbornika -->
+      <?php endif; ?>
         </ul>
       </li>
-      <li><a href="#">Two</a></li>
-      <li><a href="#">Three</a></li>
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-      <li>Login</li>
+    <li>
+          <?php if(!isset($_SESSION['autoriziran'])): ?>
+          <a href="#">Login</a>
+          <?php else: ?>
+            <a href="#">Logout</a>
+          <?php endif; ?>
+
+        </li>
     </ul>
   </div>
 </div> 

@@ -35,6 +35,7 @@ class App
             $instanca = new $klasa();
             $instanca->$funkcija();
         }else{
+            // integrirati u view
             echo 'Kreirati funkciju unutar klase ' . $klasa . '-&gt;' . $funkcija;
         }
     }
