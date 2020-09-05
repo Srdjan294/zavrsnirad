@@ -25,7 +25,7 @@
     <ul class="menu">
     <li>
           <?php if(!isset($_SESSION['autoriziran'])): ?>
-          <a href="#">Login</a>
+            <a href="<?=APP::config('url') ?>index/login">Login</a>
           <?php else: ?>
             <a href="#">Logout</a>
           <?php endif; ?>
