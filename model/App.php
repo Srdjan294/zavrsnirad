@@ -38,4 +38,21 @@ class App
             echo 'Kreirati funkciju unutar klase ' . $klasa . '-&gt;' . $funkcija;
         }
     }
+
+    
+    public static function config($kljuc)
+    {
+        $datoteka = BP . 'konfiguracija.php';
+        $konfiguracija = include $datoteka;
+
+        if(array_key_exists($kljuc,$konfiguracija)){
+            return $konfiguracija[$kljuc];
+        }else if ($konfiguracija['dev']){
+            return 'Ključ ' . $kljuc . ' ne postoji u ' . $datoteka;
+        }else{
+            return 'Ključ ' . $kljuc . ' ne postoji';
+        }
+
+    }
+
 } 
