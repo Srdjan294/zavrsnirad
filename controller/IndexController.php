@@ -14,14 +14,20 @@ class IndexController extends Controller
         $this->view->render('onama');
     }
 
-    public function login(){
-        $this->view->render('login',[
-            'email'=> '',
-            'poruka'=> 'Popunite tražene podatke'
-        ]);
+    public function login()
+    {
+        $this->loginView('','Popunite tražene podatke');
     }
 
-    public function autorizacija(){
+    public function logout()
+    {
+        unset($_SESSION['autoriziran']);
+        session_destroy();
+        $this->index();
+    }
+
+    public function autorizacija()
+    {
 
        if(!isset($_POST['email']) || !isset($_POST['lozinka'])){
             $this->login();
@@ -29,19 +35,19 @@ class IndexController extends Controller
        }
 
         if(strlen(trim($_POST['email']))===0){
-            $this->view->render('login',[
-                'email'=> '',
-                'poruka'=> 'Obavezan unos email-a'
-            ]);
+            $this->loginView(
+                trim($_POST['email']),
+                'Obavezan unos email-a'
+            );
             return;
         }
 
 
         if(strlen(trim($_POST['lozinka']))===0){
-            $this->view->render('login',[
-                'email'=> trim($_POST['email']),
-                'poruka'=> 'Obavezan unos lozinke'
-            ]);
+            $this->loginView(
+                trim($_POST['email']),
+                'Obavezan unos lozinke'
+            );
             return;
         }
 
@@ -55,27 +61,36 @@ class IndexController extends Controller
         $rezultat=$izraz->fetch();
 
         if($rezultat==null){
-            $this->view->render('login',[
-                'email'=> trim($_POST['email']),
-                'poruka'=> 'Unesena email adresa ne postoji u sustavu'
-            ]);
+            $this->loginView(
+                trim($_POST['email']),
+                'Unesena email adresa ne postoji u sustavu'
+            );
             return;
         }
 
         if(!password_verify($_POST['lozinka'],$rezultat->lozinka)){
-            $this->view->render('login',[
-                'email'=> trim($_POST['email']),
-                'poruka'=> 'Za uneseni email nije ispravna lozinka'
-            ]);
+            $this->loginView(
+                trim($_POST['email']),
+                'Za uneseni email nije ispravna lozinka'
+            );
             return;
         }
 
 
         // ovje sam autoriziran
+        unset($rezultat->lozinka);
+        $_SESSION['autoriziran']=$rezultat;
+        $np = new NadzornaplocaController();
+        $np->index();
 
+        }
 
-
-    }
+        private function loginView($email, $poruka){
+            $this->view->render('login',[
+                'email'=> $email,
+                'poruka'=> $poruka
+            ]);
+        }
 
     public function test(){
         echo password_hash("a", PASSWORD_BCRYPT);
