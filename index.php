@@ -24,3 +24,6 @@ spl_autoload_register(function($klasa)
       }
     }
 });
+
+// https://www.php.net/manual/en/language.oop5.paamayim-nekudotayim.php
+App::start(); 
