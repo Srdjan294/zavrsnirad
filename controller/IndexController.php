@@ -14,6 +14,11 @@ class IndexController extends Controller
         $this->view->render('onama');
     }
 
+    public function notfound($poruka)
+    {
+        $this->view->render('notfound',['poruka'=>$poruka]);
+    }
+
     public function login()
     {
         $this->loginView('','Popunite tražene podatke');
@@ -28,8 +33,6 @@ class IndexController extends Controller
 
     public function autorizacija()
     {
-        
-
         if(isset($_SESSION['autoriziran'])){
             $np = new NadzornaplocaController();
             $np->index();
