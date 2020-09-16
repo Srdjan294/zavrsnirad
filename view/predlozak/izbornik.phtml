@@ -7,7 +7,8 @@
         </a>
     </li>
 
-      <li><a href="<?=APP::config('url') ?>index/onama">O nama</a></li>
+      <li><a href="<?=APP::config('url') ?>index/onama">
+      <i class="fas fa-address-card"></i> O nama</a></li>
 
       <?php if(isset($_SESSION['autoriziran'])): ?>
         <!-- ovdje dođe privatni dio izbornika -->
@@ -35,9 +36,9 @@
     <ul class="menu">
     <li>
           <?php if(!isset($_SESSION['autoriziran'])): ?>
-            <a href="<?=APP::config('url') ?>index/login">Login</a>
+            <a href="<?=APP::config('url') ?>index/login"><i class="fas fa-sign-in-alt"></i></a>
           <?php else: ?>
-            <a href="<?=APP::config('url') ?>index/logout">Logout
+            <a href="<?=APP::config('url') ?>index/logout"><i class="fas fa-sign-out-alt"></i>
             <?=$_SESSION['autoriziran']->ime?>, 
             <?=$_SESSION['autoriziran']->uloga?>
             </a>
