@@ -5,7 +5,7 @@ $dev=$_SERVER['REMOTE_ADDR'] === '127.0.0.1' ? true : false;
 if($dev){
     $baza=[
         'server'=>'localhost',
-        'baza'=>'edunovapp21',
+        'baza'=>'movieshare',
         'korisnik'=>'edunova',
         'lozinka'=>'edunova'
     ];
@@ -21,7 +21,7 @@ if($dev){
 
 return [
     'dev' => $dev,
-    'nazivAPP' => 'Edunova APP',
+    'nazivAPP' => 'Movieshare',
     'url' => 'http://polaznik14.edunova.hr/',
     'baza' =>$baza
 ];

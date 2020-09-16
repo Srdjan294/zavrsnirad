@@ -10,7 +10,11 @@ class KorisnikController extends AutorizacijaController
 
     public function index()
     {
-        $this->view->render($this->viewDir . 'index');
+         // manje loše rješenje dovlačenja podataka iz baze je da ovdje se spojimo
+        // i dovučemo podatke
+        $this->view->render($this->viewDir . 'index',[
+            'korisnici'=>Korisnik::ucitajSve()
+        ]);
     }
 
 } 

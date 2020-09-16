@@ -1,1 +1,33 @@
-Korisnik
+<?php 
+// najlošije rješenje dovlačenja podataka iz baze je da ovdje se spojimo
+// i dovučemo podatke
+
+?>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Datum rođenja</th>
+            <th>Korisničko ime</th>
+            <th>Adresa</th>
+            <th>Email</th>
+            <th>Broj mobitela</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($korisnici as $korisnik): ?>
+            <tr>
+                <td><?=$korisnik->ime?></td>
+                <td><?=$korisnik->prezime?></td>
+                <td><?=$korisnik->datum_rodenja?></td>
+                <td><?=$korisnik->korisnicko_ime?></td>
+                <td><?=$korisnik->adresa?></td>
+                <td><?=$korisnik->email?></td>
+                <td><?=$korisnik->broj_mobitela?></td>
+                <td>Akcija</td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
