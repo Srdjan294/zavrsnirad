@@ -35,7 +35,10 @@
           <?php if(!isset($_SESSION['autoriziran'])): ?>
             <a href="<?=APP::config('url') ?>index/login">Login</a>
           <?php else: ?>
-            <a href="<?=APP::config('url') ?>index/logout">Logout</a>
+            <a href="<?=APP::config('url') ?>index/logout">Logout
+            <?=$_SESSION['autoriziran']->ime?>, 
+            <?=$_SESSION['autoriziran']->uloga?>
+            </a>
           <?php endif; ?>
 
         </li>

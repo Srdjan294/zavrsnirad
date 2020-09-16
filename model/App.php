@@ -36,7 +36,9 @@ class App
             $instanca->$funkcija();
         }else{
             // integrirati u view
-            echo 'Kreirati funkciju unutar klase ' . $klasa . '-&gt;' . $funkcija;
+            $ic= new IndexController();
+            $ic->notfound('Kreirati funkciju unutar klase ' . $klasa . '-&gt;' . $funkcija);
+       // echo 'Kreirati funkciju unutar klase ' . $klasa . '-&gt;' . $funkcija;
         }
     }
 
