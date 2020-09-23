@@ -1,1 +1,18 @@
-Žanr
+<?php 
+
+foreach($zanrovi as $red):
+?>
+
+<div class="callout callout-hover-reveal" data-callout-hover-reveal>
+  <div class="callout-body">
+
+    <h2><?=$red->naziv; ?></h2>
+  </div>
+  <div class="callout-footer">
+  <p><?=$red->opis; ?></p>
+  </div>
+</div>
+
+<?php 
+            endforeach;
+              ?>
