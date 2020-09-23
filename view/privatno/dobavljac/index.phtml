@@ -1,1 +1,23 @@
-Dobavljač
+<?php 
+// najlošije rješenje dovlačenja podataka iz baze je da ovdje se spojimo
+// i dovučemo podatke
+
+?>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Homepage</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($dobavljaci as $dobavljac): ?>
+            <tr>
+                <td><?=$dobavljac->naziv?></td>
+                <td><?=$dobavljac->homepage?></td>
+                <td>Akcija</td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
