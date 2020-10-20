@@ -1,35 +1,29 @@
 <a class="button expanded secondary" 
-href="<?=APP::config('url') ?>film/novo">
+href="<?=APP::config('url') ?>gledanje/novo">
     <?php include BP . 'view/predlozak/izgledDodajNovi.phtml' ?>
 </a>
 <table class="table">
     <thead>
         <tr>
-            <th>Naziv</th>
-            <th>Dobavljač</th>
-            <th>Žanr</th>
+            <th>Film</th>
+            <th>Korisnik</th>
+            <th>Vrijeme gledanja</th>
             <th>Akcija</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($entiteti as $entitet): ?>
             <tr>
-                <td><?=$entitet->naziv?></td>
-                <td><?=$entitet->dobavljac?></td>
-                <td><?=$entitet->zanr?></td>
+                <td><?=$entitet->film?></td>
+                <td><?=$entitet->korisnik?></td>
+                <td><?=$entitet->vrijeme_gledanja?></td>
                 <td>
-                <a href="<?=APP::config('url') ?>film/promjena?sifra=<?=$entitet->sifra?>&stranica=<?=$trenutna?>">
+                <a href="<?=APP::config('url') ?>gledanje/promjena?sifra=<?=$entitet->sifra?>&stranica=<?=$trenutna?>">
                     <?php include BP . 'view/predlozak/izgledPromjeni.phtml' ?>
-                </a>
-                <?php if ($entitet->gledanje==0): ?>
                 <a onclick="return confirm('Sigurno obrisati?');"
-                href="<?=APP::config('url') ?>film/brisanje?sifra=<?=$entitet->sifra?>">
+                href="<?=APP::config('url') ?>gledanje/brisanje?sifra=<?=$entitet->sifra?>">
                         <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
-                    </a>
-                    <?php else: ?>
-                    <i title="Ne može se obrisati jer korisnik gleda film" class="far fa-trash-alt" style="color: gray;"></i>
-                <?php endif; ?>
-                    </td>
+                    </a></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

@@ -1,33 +1,49 @@
-<?php 
-// najlošije rješenje dovlačenja podataka iz baze je da ovdje se spojimo
-// i dovučemo podatke
+<a class="button expanded secondary" 
+href="<?=APP::config('url') ?>korisnik/novo">
+    <?php include BP . 'view/predlozak/izgledDodajNovi.phtml' ?>
+</a>
 
-?>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Ime</th>
-            <th>Prezime</th>
-            <th>Datum rođenja</th>
-            <th>Korisničko ime</th>
-            <th>Adresa</th>
-            <th>Email</th>
-            <th>Broj mobitela</th>
-            <th>Akcija</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($korisnici as $korisnik): ?>
-            <tr>
-                <td><?=$korisnik->ime?></td>
-                <td><?=$korisnik->prezime?></td>
-                <td><?=$korisnik->datum_rodenja?></td>
-                <td><?=$korisnik->korisnicko_ime?></td>
-                <td><?=$korisnik->adresa?></td>
-                <td><?=$korisnik->email?></td>
-                <td><?=$korisnik->broj_mobitela?></td>
-                <td>Akcija</td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<form action="<?=APP::config('url') ?>korisnik/index" method="get">
+<input type="text" name="uvjet" value="<?=$uvjet?>"
+placeholder="Unesite dio imena ili prezimena" />
+</form>
+
+<nav aria-label="Pagination">
+  <ul class="pagination text-center">
+    <li class="pagination-previous"><a href="?stranica=<?=$prethodna?>&uvjet=<?=$uvjet?>" aria-label="Previuos page">Prethodno</a></li>
+    <li class="current"><span class="show-for-sr">Vi ste na</span> <?=$trenutna?> / <?=$ukupnoStranica?></li>
+    <li class="pagination-next"><a href="?stranica=<?=$sljedeca?>&uvjet=<?=$uvjet?>" aria-label="Next page">Sljedeće</a></li>
+  </ul>
+</nav>
+<div class="grid-x grid-margin-x">
+    <?php foreach($entiteti as $entitet): ?>
+        <div class="large-3 medium-6 small-12 cell" style="text-align: center">
+            <div class="callout" style="min-height: 600px;">
+                <h1 style="font-size: 1.5em"><?=$entitet->ime ?> <?=$entitet->prezime ?></h1>
+                <hr />
+                <img src="<?=APP::config('url') ?>public/img/nepoznataosoba.png" 
+                alt="<?=$entitet->ime ?> <?=$entitet->prezime ?>">
+                <hr />
+                
+                 <?=$entitet->email ?>
+                 <hr />
+                 <a href="<?=APP::config('url') ?>korisnik/promjena?sifra=<?=$entitet->sifra?>&stranica=<?=$trenutna?>">
+                    <?php include BP . 'view/predlozak/izgledPromjeni.phtml' ?>
+                </a>
+                
+                    <a onclick="return confirm('Sigurno obrisati?');"
+                    href="<?=APP::config('url') ?>korisnik/brisanje?sifra=<?=$entitet->sifra?>">
+                        <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
+                    </a>
+                    
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+<nav aria-label="Pagination">
+  <ul class="pagination text-center">
+    <li class="pagination-previous"><a href="?stranica=<?=$prethodna?>&uvjet=<?=$uvjet?>" aria-label="Previuos page">Prethodno</a></li>
+    <li class="current"><span class="show-for-sr">Vi ste na</span> <?=$trenutna?> / <?=$ukupnoStranica?></li>
+    <li class="pagination-next"><a href="?stranica=<?=$sljedeca?>&uvjet=<?=$uvjet?>" aria-label="Next page">Sljedeće</a></li>
+  </ul>
+</nav>

@@ -1,3 +1,5 @@
+# Čitati https://www.smashingmagazine.com/2011/11/introduction-to-url-rewriting/
+
 # omogućiti URL rewrite
 RewriteEngine On
 

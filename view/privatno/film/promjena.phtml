@@ -1,0 +1,109 @@
+<form
+    action="<?=APP::config('url') ?>film/promjena" 
+    method="POST">
+
+    
+
+    <div class="grid-x grid-padding-x">
+          <div class="large-12 small-12 cell">
+            <label>Naziv
+                <input type="text" name="naziv" 
+                value="<?=$entitet->naziv?>" />
+            </label>
+        </div>
+        
+        <div class="large-6 small-12 cell">
+            <label>Ime redatelja
+                <input type="text" name="ime_redatelja" 
+                value="<?=$entitet->ime_redatelja?>" />
+            </label>
+        </div>
+        <div class="large-6 small-12 cell">
+            <label>Prezime redatelja
+                <input type="text" name="prezime_redatelja" 
+                value="<?=$entitet->prezime_redatelja?>" />
+            </label>
+        </div>
+
+        <div class="large-6 small-12 cell">
+            <label>Ime glavnog glumca
+                <input type="text" name="ime_glavnog_glumca" 
+                value="<?=$entitet->ime_glavnog_glumca?>" />
+            </label>
+        </div>
+        <div class="large-6 small-12 cell">
+            <label>Prezime glavnog glumca
+                <input type="text" name="prezime_glavnog_glumca" 
+                value="<?=$entitet->prezime_glavnog_glumca?>" />
+            </label>
+        </div>
+
+        <div class="large-6 small-12 cell">
+            <label>Žanr
+              <select name="zanr" id="zanr">
+                <option <?php if($entitet->zanr==0){
+                    echo ' selected="selected" ';
+                }?> value="0">Odaberite žanr</option>
+                <?php foreach($zanrovi as $zanr): ?>
+                    <option <?php if($entitet->zanr==$zanr->sifra){
+                    echo ' selected="selected" ';
+                }?> value="<?=$zanr->sifra?>"><?=$zanr->naziv?></option>
+                <?php endforeach; ?>
+              </select>
+            </label>
+        </div>
+        
+        <div class="large-6 small-12 cell">
+            <label>Trajanje
+                <input type="number" name="trajanje" 
+                value="<?=$entitet->trajanje?>" />
+            </label>
+        </div>
+
+        <div class="large-12 small-12 cell">
+        <label>Dobavljač
+              <select name="dobavljac" id="dobavljac">
+                <option <?php if($entitet->dobavljac==0){
+                    echo ' selected="selected" ';
+                }?> value="0">Odaberite dobavljača</option>
+                <?php foreach($dobavljaci as $dobavljac): ?>
+                    <option <?php if($entitet->dobavljac==$dobavljac->sifra){
+                    echo ' selected="selected" ';
+                }?> value="<?=$dobavljac->sifra?>"><?=$dobavljac->naziv?></option>
+                <?php endforeach; ?>
+              </select>
+            </label>
+        </div>
+        
+        
+        
+        
+        <div class="large-12 small-12 cell">
+            <label>Datum izlaska
+                <input type="date" name="godina_izlaska" 
+                value="<?=$entitet->godina_izlaska?>" />
+            </label>
+        </div>
+    </div>
+
+    <input type="hidden" name="sifra" value="<?=$entitet->sifra ?>" />
+
+    <p>
+        <?=$poruka ?>
+    </p>
+
+    <div class="grid-x grid-padding-x">
+        <div class="large-6 small-12 cell">
+        <a class="button expanded alert" 
+        href="<?=APP::config('url') ?>film/index?stranica=<?=$trenutna?>">
+            Odustani
+        </a>    
+        </div>
+        <div class="large-6 small-12 cell">
+            <input type="submit" class="button expanded" 
+                value="Promjeni film"></input>
+        </div>
+    </div>
+
+
+</form>

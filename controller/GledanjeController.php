@@ -1,18 +1,18 @@
 <?php
 
-class FilmController extends AutorizacijaController
+class GledanjeController extends AutorizacijaController
 {
 
     private $viewDir = 'privatno' 
     . DIRECTORY_SEPARATOR 
-    . 'film'
+    . 'gledanje'
     . DIRECTORY_SEPARATOR;
 
 
-    public function trazifilmove()
+    public function trazigledanje()
     {
         header('Content-Type: application/json');
-        echo json_encode(Film::traziFilmove());
+        echo json_encode(Gledanje::traziGledanje());
     }
 
     public function index()
@@ -38,8 +38,8 @@ class FilmController extends AutorizacijaController
             $prethodna=$stranica-1;
         }
 
-        $brojFilmova=Film::ukupnoStranica($uvjet);
-        $ukupnoStranica=ceil($brojFilmova/App::config('rezultataPoStranici'));
+        $brojGledanja=Gledanje::ukupnoStranica($uvjet);
+        $ukupnoStranica=ceil($brojGledanja/App::config('rezultataPoStranici'));
 
         if($stranica==$ukupnoStranica){
             $sljedeca=$ukupnoStranica;
@@ -48,7 +48,7 @@ class FilmController extends AutorizacijaController
         }
 
         $this->view->render($this->viewDir . 'index', [
-            'entiteti'=>Film::ucitajSve($stranica,$uvjet),
+            'entiteti'=>Gledanje::ucitajSve($stranica,$uvjet),
             'trenutna'=>$stranica,
             'prethodna'=>$prethodna,
             'sljedeca'=>$sljedeca,
@@ -61,23 +61,17 @@ class FilmController extends AutorizacijaController
     {
         if ($_SERVER['REQUEST_METHOD']==='GET'){
             $entitet=new stdClass();
-            $entitet->naziv='';
-            $entitet->zanr=0;
-            $entitet->ime_redatelja='';
-            $entitet->prezime_redatelja='';
-            $entitet->ime_glavnog_glumca='';
-            $entitet->prezime_glavnog_glumca='';
-            $entitet->trajanje='';
-            $entitet->dobavljac=0;
-            $entitet->godina_izlaska='';
+            $entitet->film=0;
+            $entitet->korisnik=0;
+            $entitet->vrijeme_gledanja='';
             $this->novoView('Unesite tražene podatke',$entitet);
             return;
         }
       
         $entitet=(object)$_POST;
-        if(!$this->kontrolaNaziv($entitet,'novoView')){return;};
-        Film::dodajNovi($_POST);
-        $_GET['uvjet']=$entitet->naziv;
+        if(!$this->kontrolaFilm($entitet,'novoView')){return;};
+        Gledanje::dodajNovi($_POST);
+        $_GET['uvjet']=$entitet->film;
         $this->index();
        
     }
@@ -85,16 +79,16 @@ class FilmController extends AutorizacijaController
     public function promjena()
     {
         if ($_SERVER['REQUEST_METHOD']==='GET'){
-            $_SESSION['stranicaFilm']=$_GET['stranica'];
+            $_SESSION['stranicaGledanje']=$_GET['stranica'];
             $this->promjenaView('Promjenite željene podatke',
-            Film::ucitaj($_GET['sifra']));
+            Gledanje::ucitaj($_GET['sifra']));
             return;
         }
         
         $entitet=(object)$_POST;
-        if(!$this->kontrolaNaziv($entitet,'promjenaView')){return;};
-        Film::promjena($_POST);
-        $_GET['stranica']=$_SESSION['stranicaFilm'];
+        if(!$this->kontrolaFilm($entitet,'promjenaView')){return;};
+        Gledanje::promjena($_POST);
+        $_GET['stranica']=$_SESSION['stranicaGledanje'];
         $this->index();
         
     }
@@ -102,7 +96,7 @@ class FilmController extends AutorizacijaController
     public function brisanje()
     {
         //kontrola da li je šifra došla
-        Film::brisanje($_GET['sifra']);
+        Gledanje::brisanje($_GET['sifra']);
         $this->index();
         
     }
@@ -112,8 +106,8 @@ class FilmController extends AutorizacijaController
         $this->view->render($this->viewDir . 'novo',[
             'poruka'=>$poruka,
             'entitet' => $entitet,
-            'zanrovi' => Zanr::ucitajSve2(),
-            'dobavljaci' => Dobavljac::ucitajSve2()
+            'filmovi' => Film::ucitajSve2(),
+            'korisnici' => Korisnik::ucitajSve2()
         ]);
     }
 
@@ -122,27 +116,22 @@ class FilmController extends AutorizacijaController
         $this->view->render($this->viewDir . 'promjena',[
             'poruka'=>$poruka,
             'entitet' => $entitet,
-            'zanrovi' => Zanr::ucitajSve2(),
-            'dobavljaci' => Dobavljac::ucitajSve2(),
-            'trenutna'=>$_SESSION['stranicaFilm']
+            'trenutna'=>$_SESSION['stranicaGledanje']
         ]);
     }
 
 
-    private function kontrolaNaziv($entitet, $view)
+    private function kontrolaFilm($entitet, $view)
     {
-        if(strlen(trim($entitet->naziv))===0){
-            $this->$view('Obavezno unos naziva',$entitet);
+        if(strlen($entitet->film)===0){
+            $this->$view('Obavezno unos filma',$entitet);
             return false;
         }
 
-        if(strlen(trim($entitet->naziv))>50){
-            $this->$view('Dužina imena naziva',$entitet);
-            return false;
-        }
+        
         // na kraju uvijek vrati true
         return true;
     }
 
 
-}   
+} 

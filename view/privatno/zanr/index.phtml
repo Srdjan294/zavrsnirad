@@ -1,18 +1,49 @@
-<?php 
+<a class="button expanded secondary" 
+href="<?=APP::config('url') ?>zanr/novo">
+    <?php include BP . 'view/predlozak/izgledDodajNovi.phtml' ?>
+</a>
+<nav aria-label="Pagination">
+  <ul class="pagination text-center">
+    <li class="pagination-previous"><a href="?stranica=<?=$prethodna?>&uvjet=<?=$uvjet?>" aria-label="Previuos page">Prethodno</a></li>
+    <li class="current"><span class="show-for-sr">Vi ste na</span> <?=$trenutna?> / <?=$ukupnoStranica?></li>
+    <li class="pagination-next"><a href="?stranica=<?=$sljedeca?>&uvjet=<?=$uvjet?>" aria-label="Next page">Sljedeće</a></li>
+  </ul>
+</nav>
 
-foreach($zanrovi as $red):
+<?php 
+foreach($entiteti as $entitet):
 ?>
 
 <div class="callout callout-hover-reveal" data-callout-hover-reveal>
   <div class="callout-body">
 
-    <h2><?=$red->naziv; ?></h2>
+    <h2><?=$entitet->naziv; ?>
+                <a href="<?=APP::config('url') ?>zanr/promjena?sifra=<?=$entitet->sifra?>&stranica=<?=$trenutna?>">
+                <?php include BP . 'view/predlozak/izgledPromjeni.phtml' ?>
+                </a>
+                <?php if ($entitet->film==0): ?>
+                    <a onclick="return confirm('Sigurno obrisati?');"
+                    href="<?=APP::config('url') ?>zanr/brisanje?sifra=<?=$entitet->sifra?>">
+                        <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
+                    </a>
+                <?php else: ?>
+                    <i title="Ne može se obrisati jer pripada opisu filma" class="far fa-trash-alt" style="color: gray;"></i>
+                <?php endif; ?>
+                    </h2>
   </div>
   <div class="callout-footer">
-  <p><?=$red->opis; ?></p>
+  <p><?=$entitet->opis; ?></p>
   </div>
 </div>
 
 <?php 
-            endforeach;
-              ?>
+endforeach;
+?>
+
+<nav aria-label="Pagination">
+  <ul class="pagination text-center">
+    <li class="pagination-previous"><a href="?stranica=<?=$prethodna?>&uvjet=<?=$uvjet?>" aria-label="Previuos page">Prethodno</a></li>
+    <li class="current"><span class="show-for-sr">Vi ste na</span> <?=$trenutna?> / <?=$ukupnoStranica?></li>
+    <li class="pagination-next"><a href="?stranica=<?=$sljedeca?>&uvjet=<?=$uvjet?>" aria-label="Next page">Sljedeće</a></li>
+  </ul>
+</nav>

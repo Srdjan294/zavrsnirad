@@ -23,5 +23,6 @@ return [
     'dev' => $dev,
     'nazivAPP' => 'Movieshare',
     'url' => 'http://polaznik14.edunova.hr/',
-    'baza' =>$baza
+    'baza' =>$baza,
+    'rezultataPoStranici'=>8
 ];

@@ -7,18 +7,17 @@
         </a>
     </li>
 
-      <li><a href="<?=APP::config('url') ?>index/onama">
-      <i class="fas fa-address-card"></i> O nama</a></li>
+      <li><a href="<?=APP::config('url') ?>index/era">
+      <i class="fas fa-project-diagram"></i> ERA</a></li>
 
       <?php if(isset($_SESSION['autoriziran'])): ?>
         <!-- ovdje dođe privatni dio izbornika -->
-        <li>
-        
-          <a href="<?=APP::config('url') ?>nadzornaploca/index">Nadzorna ploča</a>
-          <li><a href="<?=APP::config('url') ?>korisnik/index">Korisnici</a></li>
-          <li><a href="<?=APP::config('url') ?>film/index">Filmovi</a></li>
-          <li><a href="<?=APP::config('url') ?>zanr/index">Žanrovi</a></li>
-          <li><a href="<?=APP::config('url') ?>dobavljac/index">Dobavljači</a></li>
+        <li><a href="<?=APP::config('url') ?>nadzornaploca/index">Nadzorna ploča</a>
+        <li><a href="<?=APP::config('url') ?>gledanje/index">Gledanje</a></li>
+        <li><a href="<?=APP::config('url') ?>korisnik/index">Korisnici</a></li>
+        <li><a href="<?=APP::config('url') ?>film/index">Filmovi</a></li>
+        <li><a href="<?=APP::config('url') ?>zanr/index">Žanrovi</a></li>
+        <li><a href="<?=APP::config('url') ?>dobavljac/index">Dobavljači</a></li>
           <?php if($_SESSION['autoriziran']->uloga==='admin'): ?>
             <li><a href="<?=APP::config('url') ?>operater/index">Operateri</a></li>
             <?php else: ?>

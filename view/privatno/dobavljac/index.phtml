@@ -1,8 +1,7 @@
-<?php 
-// najlošije rješenje dovlačenja podataka iz baze je da ovdje se spojimo
-// i dovučemo podatke
-
-?>
+<a class="button expanded secondary" 
+href="<?=APP::config('url') ?>dobavljac/novo">
+    <?php include BP . 'view/predlozak/izgledDodajNovi.phtml' ?>
+</a>
 <table class="table">
     <thead>
         <tr>
@@ -12,12 +11,31 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($dobavljaci as $dobavljac): ?>
+        <?php foreach($entiteti as $entitet): ?>
             <tr>
-                <td><?=$dobavljac->naziv?></td>
-                <td><?=$dobavljac->homepage?></td>
-                <td>Akcija</td>
+                <td><?=$entitet->naziv?></td>
+                <td><?=$entitet->homepage?></td>
+                <td>
+                <a href="<?=APP::config('url') ?>dobavljac/promjena?sifra=<?=$entitet->sifra?>&stranica=<?=$trenutna?>">
+                <?php include BP . 'view/predlozak/izgledPromjeni.phtml' ?>
+                </a>
+                <?php if ($entitet->film==0): ?>
+                <a onclick="return confirm('Sigurno obrisati?');"
+                href="<?=APP::config('url') ?>dobavljac/brisanje?sifra=<?=$entitet->sifra?>">
+                        <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
+                    </a>
+                    <?php else: ?>
+                        <i title="Ne može se obrisati jer pripada filmu" class="far fa-trash-alt" style="color: gray;"></i>
+                <?php endif; ?>
+                    </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+<nav aria-label="Pagination">
+  <ul class="pagination text-center">
+    <li class="pagination-previous"><a href="?stranica=<?=$prethodna?>&uvjet=<?=$uvjet?>" aria-label="Previuos page">Prethodno</a></li>
+    <li class="current"><span class="show-for-sr">Vi ste na</span> <?=$trenutna?> / <?=$ukupnoStranica?></li>
+    <li class="pagination-next"><a href="?stranica=<?=$sljedeca?>&uvjet=<?=$uvjet?>" aria-label="Next page">Sljedeće</a></li>
+  </ul>
+</nav>
