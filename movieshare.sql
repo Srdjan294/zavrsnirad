@@ -69,20 +69,20 @@ alter table film add foreign key (dobavljac) references dobavljac(sifra);
 alter table gledanje add foreign key (film) references film(sifra);
 alter table gledanje add foreign key (korisnik) references korisnik(sifra);
 
-insert into korisnik (prezime,ime,email) values
-('Jakopec', 'Tomislav','tjakopec@gmail.com'),
-('Ereš','Mirko','mirko.eres1@gmail.com'),
-('Filipović','Srđan','srdjanfilipovic991@gmail.com'),
-('Grbeša','Antonio','agrbesa995@gmail.com'),
-('Ivanšić','Ivan','ivan.ivansic@sdfgroup.com'),
-('Klarić','Ines','klaricnes@gmail.com'),
-('Kožić','Borna','borna.kozic2@gmail.com'),
-('Kožić','Sven','svenkozic@hotmail.com'),
-('Kucelj','Valentina','valentina.kucelj@gmail.com'),
-('Luketić','Darko','oninator@gmail.com'),
-('Mikić','Marijan','marijan.mikic@icloud.com'),
-('Raguž','Gabrijela','gabrijela.ragu@gmail.com'),
-('Lalić','Ivana','ilalic110@gmail.com');
+insert into korisnik (prezime,ime,email,korisnicko_ime) values
+('Jakopec', 'Tomislav','tjakopec@gmail.com','Tomislav01'),
+('Ereš','Mirko','mirko.eres1@gmail.com','Mirko01'),
+('Filipović','Srđan','srdjanfilipovic991@gmail.com','Srđan01'),
+('Grbeša','Antonio','agrbesa995@gmail.com','Antonio01'),
+('Ivanšić','Ivan','ivan.ivansic@sdfgroup.com','Ivan01'),
+('Klarić','Ines','klaricnes@gmail.com','Ines01'),
+('Kožić','Borna','borna.kozic2@gmail.com','Borna01'),
+('Kožić','Sven','svenkozic@hotmail.com','Sven01'),
+('Kucelj','Valentina','valentina.kucelj@gmail.com','Valentina01'),
+('Luketić','Darko','oninator@gmail.com','Darko01'),
+('Mikić','Marijan','marijan.mikic@icloud.com','Marijan01'),
+('Raguž','Gabrijela','gabrijela.ragu@gmail.com','Gabrijela01'),
+('Lalić','Ivana','ilalic110@gmail.com','Ivana01');
 
 insert into zanr(naziv,opis) values 
 ('Akcija','Akcijski film je filmski žanr u kojem akcijske sekvence, poput borbe, kaskaderskih scena, 

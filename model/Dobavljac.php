@@ -96,17 +96,9 @@ class Dobavljac
 
     public static function promjena($entitet){
         $veza = DB::getInstanca();
-        $veza->beginTransaction();
-
-        $izraz = $veza->prepare('
         
-        select sifra, naziv, homepage from dobavljac where sifra=:sifra ;
 
-        ');
-        $izraz->execute(['sifra'=>$entitet['sifra']]);
-        $sifraDobavljac = $izraz->fetchColumn();
-
-        $izraz = $veza->prepare('update zanr set
+        $izraz = $veza->prepare('update dobavljac set
                     naziv=:naziv,
                     homepage=:homepage
                     where sifra=:sifra');
@@ -117,7 +109,7 @@ class Dobavljac
         ]);
         
         
-        $veza->commit();
+      
     }
 
     public static function brisanje($sifra){

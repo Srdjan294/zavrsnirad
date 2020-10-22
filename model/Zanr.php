@@ -88,15 +88,7 @@ class Zanr
 
     public static function promjena($entitet){
         $veza = DB::getInstanca();
-        $veza->beginTransaction();
-
-        $izraz = $veza->prepare('
         
-        select sifra, naziv, opis from zanr where sifra=:sifra ;
-
-        ');
-        $izraz->execute(['sifra'=>$entitet['sifra']]);
-        $sifraZanr = $izraz->fetchColumn();
 
         $izraz = $veza->prepare('update zanr set
                     naziv=:naziv,
@@ -105,11 +97,11 @@ class Zanr
         $izraz->execute([
             'naziv'=>$entitet['naziv'],
             'opis'=>$entitet['opis'],
-            'sifra'=>$sifraZanr
+            'sifra'=>$entitet['sifra']
         ]);
         
         
-        $veza->commit();
+        
     }
 
     public static function brisanje($sifra){

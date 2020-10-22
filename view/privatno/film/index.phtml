@@ -21,14 +21,12 @@ href="<?=APP::config('url') ?>film/novo">
                 <a href="<?=APP::config('url') ?>film/promjena?sifra=<?=$entitet->sifra?>&stranica=<?=$trenutna?>">
                     <?php include BP . 'view/predlozak/izgledPromjeni.phtml' ?>
                 </a>
-                <?php if ($entitet->gledanje==0): ?>
+                
                 <a onclick="return confirm('Sigurno obrisati?');"
                 href="<?=APP::config('url') ?>film/brisanje?sifra=<?=$entitet->sifra?>">
                         <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
                     </a>
-                    <?php else: ?>
-                    <i title="Ne može se obrisati jer korisnik gleda film" class="far fa-trash-alt" style="color: gray;"></i>
-                <?php endif; ?>
+                    
                     </td>
             </tr>
         <?php endforeach; ?>
